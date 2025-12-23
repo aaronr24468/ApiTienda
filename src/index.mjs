@@ -7,8 +7,12 @@ import { expressjwt } from "express-jwt";
 import { router as jwtRouter } from "./routes/jwt.mjs";
 import cors from 'cors';
 import { router as registerRouter } from "./routes/register.mjs";
+import {config} from 'dotenv'
+config();
+
 
 const app = express();
+const puerto = process.env.PORT
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -34,5 +38,5 @@ app.use((err, request, response, next) =>{
 })
 
 app.listen(8080, () =>{
-    console.log('Listening to the http://localhost:8080');
+    console.log(`Listening to the http://localhost:${puerto}`);
 })

@@ -1,4 +1,5 @@
 import express from "express";
+import {createServer} from 'http';
 import morgan from "morgan";
 import {dirname, join} from 'path';
 import {fileURLToPath} from 'url';
@@ -12,6 +13,7 @@ config();
 
 
 const app = express();
+const server = createServer(app)
 const puerto = process.env.PORT
 
 app.use(cors());
@@ -37,6 +39,6 @@ app.use((err, request, response, next) =>{
     }
 })
 
-app.listen(8080, () =>{
+server.listen(puerto, () =>{
     console.log(`Listening to the http://localhost:${puerto}`);
 })

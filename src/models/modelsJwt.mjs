@@ -1,21 +1,4 @@
-import mysql from 'mysql2/promise';
-import {config} from 'dotenv'
-config()
-const connection = await mysql.createConnection({
-    host: `${process.env.host}`,
-    user: `${process.env.user}`,
-    password: `${process.env.password}`,
-    database: `${process.env.DB}`
-})
-
-await connection.connect((err) =>{ 
-    if(err){
-        console.error(err)
-    }else{
-        console.log('Connected');
-    }
-})
-
+import { connection } from "../functions/connectionDB.mjs";
 
 export const getUser = async(info={}) =>{
     let queryD = [];

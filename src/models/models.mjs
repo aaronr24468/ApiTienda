@@ -8,13 +8,6 @@ const connection = await mysql.createConnection({
     database: `${process.env.DB}`
 })
 
-await connection.connect((err) =>{
-    if(err){
-        console.log(err)
-    }else{
-        console.log('Connected')
-    }
-})
 
 export const getA = async() =>{
     const query = 'SELECT * FROM products';

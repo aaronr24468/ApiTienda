@@ -8,7 +8,7 @@ export const getUser = async(info={}) =>{
         }
     }
     const query = `SELECT * FROM users WHERE ${queryD.join(' AND ')}`;
-    const [user] = await connection.query(query, [info.username, info.password])
+    const [user] = await connection.query(query, [info.username])
     //console.log(user)
     return(user)
 }   

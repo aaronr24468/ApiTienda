@@ -1,5 +1,7 @@
 import { addI, cartProducts, deleteI, deleteP, editP, getA, getCart, getCate, getP, insertI, profileP, registerU, searchI, sliderI, updateCart } from "../models/models.mjs";
+import bcrypr from 'bcrypt';
 
+const saltRounds = 10;
 
 
 export const getAll = async(request, response) =>{
@@ -148,8 +150,10 @@ export const registerUser = async(request, response) =>{
             videos: '',
             cart: ''
         }
-        console.log(userData)
-        await registerU(userData)
+        bcrypr.hash(userData.password, saltRounds, async(err, hash)=>{
+            userData.password = hash;
+            await registerU(userData)
+        })
         response.status(200).json("S")
     } catch (e) {
         console.error(e);

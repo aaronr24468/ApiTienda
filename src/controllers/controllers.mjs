@@ -92,7 +92,7 @@ export const insertImage = async(request, response) =>{
             url: []
         }
         for(let value of info){
-            photos.push(`http://localhost:8080/content/photos/${value.filename}`)
+            photos.push(`https://apitienda-fibr.onrender.com/content/photos/${value.filename}`)
         }
         data.url.push(photos.join(' '))
         console.log(info)
@@ -113,7 +113,7 @@ export const addImage = async(request, response) =>{
             url: []
         }
         request.files.forEach((element) =>{
-            info.url.push(`http://localhost:8080/content/photos/${element.filename}`)
+            info.url.push(`https://apitienda-fibr.onrender.com/content/photos/${element.filename}`)
         });
         await addI(info)
         response.status(200).send('S')
@@ -179,7 +179,7 @@ export const profilePhoto = async(request, response) =>{
     try {
         const data = {
             id: request.params.id,
-            url: `http://localhost:8080/content/userPhoto/${request.file.filename}`
+            url: `https://apitienda-fibr.onrender.com/content/userPhoto/${request.file.filename}`
         }
         await profileP(data);
         response.status(200).json('S')

@@ -1,5 +1,7 @@
 import { addI, cartProducts, deleteI, deleteP, editP, getA, getCart, getCate, getP, insertI, profileP, registerU, searchI, sliderI, updateCart } from "../models/models.mjs";
 import bcrypr from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { getUser } from "../models/modelsJwt.mjs";
 
 const saltRounds = 10;
 
@@ -181,6 +183,7 @@ export const profilePhoto = async(request, response) =>{
             id: request.params.id,
             url: `https://apitienda-fibr.onrender.com/content/userPhoto/${request.file.filename}`
         }
+        console.log(data)
         await profileP(data);
         response.status(200).json('S')
     } catch (e) {
@@ -272,5 +275,19 @@ export const deleteCartList = async(request, response) =>{
     } catch (e) {
         console.error(e);
         response.status(401).json("F");
+    }
+}
+
+export const tokenRefresh = async(request, response) =>{
+    try {
+        const data = request.auth[0];
+        const username = data.username;
+        const user = await getUser({username})
+        const payload = {...user}
+        const token = jwt.sign(payload, 'secret');
+        response.status(200).json(token)
+    } catch (e) {
+        console.error(e)
+        response.status(401).json("F")
     }
 }

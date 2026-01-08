@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addCart, addImage, deleteCartList, deleteImage, deleteProduct, editProduct, getAll, getCategory, getItemsCart, getProduct, getUserPhoto, insertImage, profilePhoto, searchItem, sliderItems } from "../controllers/controllers.mjs";
+import { addCart, addImage, deleteCartList, deleteImage, deleteProduct, editProduct, getAll, getCategory, getItemsCart, getProduct, getUserPhoto, insertImage, profilePhoto, searchItem, sliderItems, tokenRefresh } from "../controllers/controllers.mjs";
 import multer from "multer";
 import {dirname, join,} from 'path';
 import { fileURLToPath } from "url";
@@ -72,5 +72,7 @@ router.post('/addCart', addCart);
 
 router.post('/getCart', getItemsCart);
 
-router.post('/deleteCartList', deleteCartList)
+router.post('/deleteCartList', deleteCartList);
+
+router.get('/tokenRefresh', tokenRefresh)
 
